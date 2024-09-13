@@ -1,0 +1,55 @@
+﻿@model IEnumerable<AtulaTestWebsite.Models.ViewModels.ProductVM>
+<partial name="_Notification" />
+
+@{
+    ViewData["Title"] = "View Products";
+}
+
+<h2 class="mt-4">Product List</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Sku</th>
+            <th>Categories</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var productVM in Model)
+        {
+            <tr>
+                <td>@productVM.Name</td>
+                <td>@productVM.Sku</td>
+                <td>
+                    @if (productVM.ProductCategories != null && productVM.ProductCategories.Any())
+                    {
+                        @foreach (var productCategory in productVM.ProductCategories)
+                        {
+                            if (productCategory.Category != null)
+                            {
+                                @productCategory.Category.Name
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <p class="text-danger fw-bold">CATEGORY DELETED</p>
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-area="Admin" asp-controller="Product" asp-action="Edit" asp-route-id="@productVM.Id">Edit</a>
+                </td>
+                <td>
+                    <a class="btn btn-danger" asp-area="Admin" asp-controller="Product" asp-action="Delete" asp-route-id="@productVM.Id">Delete</a>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="5">
+                <a class="btn btn-success" asp-area="Admin" asp-controller="Product" asp-action="Create">Create</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

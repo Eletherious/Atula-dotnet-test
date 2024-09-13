@@ -1,0 +1,37 @@
+﻿@model IEnumerable<AtulaTestWebsite.Models.ViewModels.CategoryVM>
+<partial name="_Notification" />
+
+@{
+    ViewData["Title"] = "View Category";
+}
+
+<h2 class="mt-4">Category List</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var productVM in Model)
+        {
+            <tr>
+                <td>@productVM.Name</td>
+
+                <td>
+                    <a class="btn btn-primary" asp-area="Admin" asp-controller="Category" asp-action="Edit" asp-route-id="@productVM.Id">Edit</a>
+                </td>
+                <td>
+                    <a class="btn btn-danger" asp-area="Admin" asp-controller="Category" asp-action="Delete" asp-route-id="@productVM.Id">Delete</a>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="5">
+                <a class="btn btn-success" asp-area="Admin" asp-controller="Category" asp-action="Create">Create</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,38 @@
+﻿@model AtulaTestWebsite.Models.ViewModels.ProductVM
+<partial name="_Notification" />
+<partial name="_ValidationScriptsPartial" />
+
+@{
+    ViewData["Title"] = "Create Product";
+}
+
+<h2>Create Product</h2>
+
+<form asp-action="Create" method="post" class="form-horizontal">
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Category Name</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Sku" class="form-label">Product Sku</label>
+        <input asp-for="Sku" class="form-control" />
+        <span asp-validation-for="Sku" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="CategoryId" class="form-label">Select Category</label>
+        @Html.DropDownListFor(m => m.CategoryId, Model.Categories, "Select One...", new { @class = "form-control" })
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+
+        <small class="form-text text-muted mt-2">
+            <a asp-area="Admin" asp-controller="Category" asp-action="Create" asp-route-returnUrl="@Url.Action("Create", "Product", new { area = "Admin" })" class="text-primary">
+                Can't find your category? Create a new one
+            </a>
+        </small>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a class="btn btn-secondary" asp-area="Admin" asp-controller="Product" asp-action="Index">Back to List</a>
+</form>

@@ -1,0 +1,20 @@
+﻿@model AtulaTestWebsite.Models.ViewModels.CategoryVM
+
+@{
+    ViewData["Title"] = "Delete Category";
+}
+
+<h2>Delete Category</h2>
+
+<div>
+    <h3>Are you sure you want to delete this category?</h3>
+    <div>
+        <h4>Product: @Model.Name</h4>
+    </div>
+</div>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a class="btn btn-secondary" asp-area="Admin" asp-controller="Category" asp-action="Index">Back to List</a>
+</form>
